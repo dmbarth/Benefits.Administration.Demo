@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.API", "Benefits.Administration.API\Benefits.Administration.API.csproj", "{EDDD1394-8ADA-4719-8337-BEB5CECE78FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1FF3784F-94F4-4845-A596-5E19F1A8B9AA}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.Application", "Benefits.Administration.Application\Benefits.Administration.Application.csproj", "{486B3D2F-42CF-49DC-AF2A-F70DF4767658}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.Infrastructure", "Benefits.Administration.Infrastructure\Benefits.Administration.Infrastructure.csproj", "{FA174B95-2357-4BF0-A0A0-33CDC36F4B80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CD2B1A4A-3734-48D4-9F3B-AEA4DDA7ED08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benefits.Administration.Application.Tests", "Benefits.Administration.Application.Tests\Benefits.Administration.Application.Tests.csproj", "{FE80A09F-D407-4970-9040-541CC13AA015}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDDD1394-8ADA-4719-8337-BEB5CECE78FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDD1394-8ADA-4719-8337-BEB5CECE78FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDD1394-8ADA-4719-8337-BEB5CECE78FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDD1394-8ADA-4719-8337-BEB5CECE78FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486B3D2F-42CF-49DC-AF2A-F70DF4767658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486B3D2F-42CF-49DC-AF2A-F70DF4767658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486B3D2F-42CF-49DC-AF2A-F70DF4767658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486B3D2F-42CF-49DC-AF2A-F70DF4767658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA174B95-2357-4BF0-A0A0-33CDC36F4B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA174B95-2357-4BF0-A0A0-33CDC36F4B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA174B95-2357-4BF0-A0A0-33CDC36F4B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA174B95-2357-4BF0-A0A0-33CDC36F4B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE80A09F-D407-4970-9040-541CC13AA015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE80A09F-D407-4970-9040-541CC13AA015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE80A09F-D407-4970-9040-541CC13AA015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE80A09F-D407-4970-9040-541CC13AA015}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE80A09F-D407-4970-9040-541CC13AA015} = {CD2B1A4A-3734-48D4-9F3B-AEA4DDA7ED08}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF196DBD-9E56-4A2C-A0DF-2C13305058EF}
+	EndGlobalSection
+EndGlobal
