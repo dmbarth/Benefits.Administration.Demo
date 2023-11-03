@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.API", "Benefits.Administration.API\Benefits.Administration.API.csproj", "{EDDD1394-8ADA-4719-8337-BEB5CECE78FA}"
 EndProject
@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
 		.gitignore = .gitignore
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.Application", "Benefits.Administration.Application\Benefits.Administration.Application.csproj", "{486B3D2F-42CF-49DC-AF2A-F70DF4767658}"
@@ -17,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.Inf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CD2B1A4A-3734-48D4-9F3B-AEA4DDA7ED08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benefits.Administration.Application.Tests", "Benefits.Administration.Application.Tests\Benefits.Administration.Application.Tests.csproj", "{FE80A09F-D407-4970-9040-541CC13AA015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benefits.Administration.Application.Tests", "Benefits.Administration.Application.Tests\Benefits.Administration.Application.Tests.csproj", "{FE80A09F-D407-4970-9040-541CC13AA015}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
