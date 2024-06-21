@@ -2,21 +2,21 @@
 
 ### Getting Started
 
-1. Open the solution with Visual Studio
-1. Specify the startup project `Benefits.Administration.API`
-3. Open Package Manager Console in Visual Studio and run
+1. Update `BenefitsDbContext` connection string in the `appsettings.Development.json`
+2. Run the EF database migration
 ```
-Update-Database
+dotnet ef database update --project src/Benefits.Administration.API
 ```
-3. Debug `Benefits.Administration.Demo`
-    - Swagger will startup indicating the API is ready
-4. Open a terminal and navigate to `Benefits.Administration.Client` folder
-5. Run the command and let the dependencies install
+3. Run the backend
 ```
-npm i
+dotnet run --project  src/Benefits.Administration.API
+```
+4. Install client packages
+```
+cd src/Benefits.Administration.Client && npm i
 ``` 
-6. Start a dev server with HMR on port `4321` for localhost
+5. Start the client dev server with HMR on port `4321` for localhost
 ```
 npm start
 ```
-7. Open up a web browser and navigate to `http://localhost:4321`
+6. Open up a web browser and navigate to `http://localhost:4321`
