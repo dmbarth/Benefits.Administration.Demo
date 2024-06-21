@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/Benefits.Administration.API/bin/Debug/netcoreapp3.1/Benefits.Administration.API.dll",
+            "program": "${workspaceFolder}/src/Benefits.Administration.API/bin/Debug/netcoreapp8/Benefits.Administration.API.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Benefits.Administration.API",
             "stopAtEntry": false,
