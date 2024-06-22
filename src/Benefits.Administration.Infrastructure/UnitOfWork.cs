@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Infrastructure
 {
-    public class UnitOfWork : IUnitOfWork
+  public class UnitOfWork : IUnitOfWork
+  {
+    private readonly BenefitsDbContext _context;
+
+    public UnitOfWork(BenefitsDbContext dbContext)
     {
-        private readonly BenefitsDbContext _context;
+      _context = dbContext;
 
-        public UnitOfWork(BenefitsDbContext dbContext)
-        {
-            _context = dbContext;
-
-            Employees = new EmployeeRepository(_context);
-            Benefits = new BenefitRepository(_context);
-        }
-
-        public IEmployeeRepository Employees { get; private set; }
-
-        public IBenefitRepository Benefits { get; private set; }
-
-        public async Task<int> CompleteAsync()
-        {
-            return await _context.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+      Employees = new EmployeeRepository(_context);
+      Benefits = new BenefitRepository(_context);
     }
+
+    public IEmployeeRepository Employees { get; private set; }
+
+    public IBenefitRepository Benefits { get; private set; }
+
+    public async Task<int> CompleteAsync()
+    {
+      return await _context.SaveChangesAsync();
+    }
+
+    public void Dispose()
+    {
+      _context.Dispose();
+    }
+  }
 }

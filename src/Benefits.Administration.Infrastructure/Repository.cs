@@ -9,48 +9,50 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Infrastructure
 {
-    public abstract class Repository<T> : IRepository<T> where T : class
+  public abstract class Repository<T> : IRepository<T> where T : class
+  {
+    protected readonly BenefitsDbContext _context;
+    protected readonly DbSet<T> _dbSet;
+
+    public Repository(BenefitsDbContext dbContext)
     {
-        protected readonly BenefitsDbContext _context;
-
-        public Repository(BenefitsDbContext dbContext)
-        {
-            _context = dbContext;
-        }
-
-        public virtual void Add(T entity)
-        {
-            _context.Set<T>().Add(entity);
-        }
-
-        public virtual void AddRange(IEnumerable<T> entities)
-        {
-            _context.Set<T>().AddRange(entities);
-        }
-
-        public async virtual Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression)
-        {
-            return await _context.Set<T>().Where(expression).ToListAsync();
-        }
-
-        public async virtual Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _context.Set<T>().ToListAsync();
-        }
-
-        public async virtual Task<T> GetByIdAsync(long id)
-        {
-            return await _context.Set<T>().FindAsync(id);
-        }
-
-        public virtual void Remove(T entity)
-        {
-             _context.Set<T>().Remove(entity);
-        }
-
-        public virtual void RemoveRange(IEnumerable<T> entities)
-        {
-            _context.Set<T>().RemoveRange(entities);
-        }
+      _context = dbContext;
+      _dbSet = _context.Set<T>();
     }
+
+    public virtual void Add(T entity)
+    {
+      _dbSet.Add(entity);
+    }
+
+    public virtual void AddRange(IEnumerable<T> entities)
+    {
+      _dbSet.AddRange(entities);
+    }
+
+    public async virtual Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression)
+    {
+      return await _dbSet.Where(expression).ToListAsync();
+    }
+
+    public async virtual Task<IEnumerable<T>> GetAllAsync()
+    {
+      return await _dbSet.ToListAsync();
+    }
+
+    public async virtual Task<T> GetByIdAsync(long id)
+    {
+      return await _dbSet.FindAsync(id);
+    }
+
+    public virtual void Remove(T entity)
+    {
+      _dbSet.Remove(entity);
+    }
+
+    public virtual void RemoveRange(IEnumerable<T> entities)
+    {
+      _dbSet.RemoveRange(entities);
+    }
+  }
 }
