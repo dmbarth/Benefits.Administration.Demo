@@ -10,24 +10,31 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Infrastructure.Repositories
 {
-    public class BenefitRepository : Repository<Benefit>, IBenefitRepository
+  public class BenefitRepository : Repository<Benefit>, IBenefitRepository
+  {
+    public BenefitRepository(BenefitsDbContext context) : base(context) { }
+
+    public async override Task<Benefit> GetByIdAsync(long id)
     {
-        public BenefitRepository(BenefitsDbContext context) : base(context) { }
-
-        public async override Task<Benefit> GetByIdAsync(long id)
-        {
-            return await _context.Benefits
-                .Where(entity => entity.ID == id)
-                .Include(entity => entity.Discounts)
-                .FirstOrDefaultAsync();
-        }
-
-        public async override Task<IEnumerable<Benefit>> FindAsync(Expression<Func<Benefit, bool>> expression)
-        {
-            return await _context.Benefits
-                .Where(expression)
-                .Include(entity => entity.Discounts)
-                .ToListAsync();
-        }
+      return await _context.Benefits
+        .Where(entity => entity.ID == id)
+        .Include(entity => entity.Discounts)
+        .FirstOrDefaultAsync();
     }
+
+    public async override Task<IEnumerable<Benefit>> GetAllAsync()
+    {
+      return await _context.Benefits
+        .Include(entity => entity.Discounts)
+        .ToListAsync();
+    }
+
+    public async override Task<IEnumerable<Benefit>> FindAsync(Expression<Func<Benefit, bool>> expression)
+    {
+      return await _context.Benefits
+        .Where(expression)
+        .Include(entity => entity.Discounts)
+        .ToListAsync();
+    }
+  }
 }

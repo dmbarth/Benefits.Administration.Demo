@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Benefits.Administration.Application.Entities;
+using Benefits.Administration.Application.Interfaces;
+using Benefits.Administration.Application.Interfaces.Services;
+using Microsoft.Extensions.Logging;
+
+namespace Benefits.Administration.Application.Services 
+{
+  public class BenefitsService : IBenefitsService
+  {
+    private readonly ILogger<BenefitsService> _logger;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public BenefitsService(ILogger<BenefitsService> logger, IUnitOfWork unitOfWork)
+    {
+      _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<BenefitsService>));
+      _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(IUnitOfWork));
+    }
+
+    public async Task<Benefit> GetBenefitByIdAsync(long id)
+    {
+      return await _unitOfWork.Benefits.GetByIdAsync(id);
+    }
+
+    public async Task<IEnumerable<Benefit>> GetBenefitsAsync()
+    {
+      return await _unitOfWork.Benefits.GetAllAsync();
+    }
+
+    public async Task<IEnumerable<Benefit>> GetBenefitsAsync(int? year)
+    {
+      if (year.HasValue == false)
+        return await GetBenefitsAsync();
+      
+      return await _unitOfWork.Benefits.FindAsync(entity => entity.Year == year);
+    }
+  }
+}

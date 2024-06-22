@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Benefits.Administration.Application.Interfaces.Services;
 using Benefits.Administration.Application.Interfaces.UseCases;
 using Benefits.Administration.Application.Models.Profiles;
+using Benefits.Administration.Application.Services;
 using Benefits.Administration.Application.UseCases;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +14,17 @@ namespace Benefits.Administration.Application.Extensions
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(typeof(EmployeeProfile).Assembly);
+            services.AddServices();
             services.AddUseCases();
 
             return services;
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services)
+        {
+          services.AddScoped<IBenefitsService, BenefitsService>();
+
+          return services;
         }
 
         private static IServiceCollection AddUseCases(this IServiceCollection services)
