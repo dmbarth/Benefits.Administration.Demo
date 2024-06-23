@@ -92,7 +92,7 @@ export const fetchEmployee = (id: number, costPeriods?: number): any => async (d
   dispatch(fetching());
 
   try {
-    var route = `https://localhost:5001/api/Employees/${id}`;
+    var route = `http://localhost:5000/api/Employees/${id}`;
     var employeePromise = Axios.get<Employee>(`${route}`);
 
     var results = await Promise.all([employeePromise, dispatch(fetchEmployeeDeductions(id, costPeriods))]);
@@ -110,7 +110,7 @@ export const addNewEmployee = (employee: Employee): any => async (dispatch: Disp
   dispatch(adding());
 
   try {
-    var route = `https://localhost:5001/api/Employees`;
+    var route = `http://localhost:5000/api/Employees`;
 
     await Axios.post<void>(`${route}`, employee);
 
@@ -127,7 +127,7 @@ export const addNewDependent = (employeeId: number, dependent: Dependent): any =
   dispatch(adding());
 
   try {
-    var route = `https://localhost:5001/api/Employees/${employeeId}/Dependents`;
+    var route = `http://localhost:5000/api/Employees/${employeeId}/Dependents`;
 
     await Axios.post<void>(`${route}`, dependent);
 
@@ -143,7 +143,7 @@ export const addNewDependent = (employeeId: number, dependent: Dependent): any =
 export const deleteEmployee = (id: number): any => async (dispatch: Dispatch) => {
   dispatch(deleting());
   try {
-    var route = `https://localhost:5001/api/Employees/${id}`;
+    var route = `http://localhost:5000/api/Employees/${id}`;
 
     await Axios.delete<void>(`${route}`);
 
@@ -159,7 +159,7 @@ export const deleteEmployee = (id: number): any => async (dispatch: Dispatch) =>
 export const deleteDependent = (id: number, dependentId: number): any => async (dispatch: Dispatch) => {
   dispatch(deleting());
   try {
-    var route = `https://localhost:5001/api/Employees/${id}/Dependents/${dependentId}`;
+    var route = `http://localhost:5000/api/Employees/${id}/Dependents/${dependentId}`;
 
     await Axios.delete<void>(`${route}`);
 
@@ -175,7 +175,7 @@ export const deleteDependent = (id: number, dependentId: number): any => async (
 export const editEmployee = (employee: Employee): any => async (dispatch: Dispatch) => {
   dispatch(editing());
   try {
-    var route = `https://localhost:5001/api/Employees/${employee.id}`;
+    var route = `http://localhost:5000/api/Employees/${employee.id}`;
 
     await Axios.put<void>(`${route}`, employee);
 
@@ -191,7 +191,7 @@ export const editEmployee = (employee: Employee): any => async (dispatch: Dispat
 export const editDependent = (id: number, dependent: Dependent): any => async (dispatch: Dispatch) => {
   dispatch(editing());
   try {
-    var route = `https://localhost:5001/api/Employees/${id}/Dependents/${dependent.id}`;
+    var route = `http://localhost:5000/api/Employees/${id}/Dependents/${dependent.id}`;
 
     await Axios.put<void>(`${route}`, dependent);
 

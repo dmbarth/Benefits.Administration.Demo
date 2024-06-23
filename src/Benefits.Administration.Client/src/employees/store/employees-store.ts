@@ -46,7 +46,7 @@ export const fetchEmployees = (): any => async (dispatch: Dispatch) => {
   dispatch(fetching());
 
   try {
-    var response = await Axios.get<Employee[]>("https://localhost:5001/api/Employees");
+    var response = await Axios.get<Employee[]>("http://localhost:5000/api/Employees");
 
     dispatch(received(response.data))
 

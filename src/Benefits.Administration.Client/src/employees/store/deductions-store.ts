@@ -50,7 +50,7 @@ export const fetchEmployeeDeductions = (id: number, costPeriods: number): any =>
   dispatch(fetching(costPeriods));
 
   try {
-    var route = `https://localhost:5001/api/Employees/${id}/Deductions${qs.stringify({ costPeriods }, { addQueryPrefix: true })}`;
+    var route = `http://localhost:5000/api/Employees/${id}/Deductions${qs.stringify({ costPeriods }, { addQueryPrefix: true })}`;
 
     var result = await Axios.get<EmployeeDeductions>(route);
 
