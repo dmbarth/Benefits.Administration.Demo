@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Benefits.Administration.Application.Entities;
 
 namespace Benefits.Administration.Application.Models.Profiles
 {
-  public class EmployeeProfile : Profile
+  public class DependentProfile : Profile
   {
-    public EmployeeProfile()
+    public DependentProfile()
     {
-      CreateMap<Employee, Employee>()
+      CreateMap<Dependent, Dependent>()
         .ForMember(dest => dest.Id, opt => opt.Ignore());
     }
   }

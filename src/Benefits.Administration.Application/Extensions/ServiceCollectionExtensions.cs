@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 using Benefits.Administration.Application.Interfaces.Services;
 using Benefits.Administration.Application.Models.Profiles;
 using Benefits.Administration.Application.Services;
@@ -11,7 +12,7 @@ namespace Benefits.Administration.Application.Extensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(typeof(EmployeeProfile).Assembly);
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddServices();
 
             return services;
