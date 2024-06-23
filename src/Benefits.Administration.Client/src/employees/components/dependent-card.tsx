@@ -61,7 +61,7 @@ class DependentCard extends React.Component<Props> {
       return (
         <div>
           <Button type='submit' variant='dark' className='float-right'>Save</Button>
-          <Button type='reset' variant='dark' className='float-right' onClick={() => {
+          <Button type='reset' variant='outline-secondary' className='float-right mr-2' onClick={() => {
             reset();
             onCancel();
           }}>Cancel</Button>

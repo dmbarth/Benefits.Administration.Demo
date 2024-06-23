@@ -24,6 +24,32 @@ The abstract repository provides virtual methods for accessing the `DbSet` and c
 
 ### UI
 
+#### Class Based Components
+
+#### State Management
+- Redux using Slices
+- `connect` Higher-Order Component
+
+#### Navigation
+- React Router
+  - `withRouter` Higher-Order Component
+- Update routes when navigating pages or selecting tabs to preserve view state on page refreshes
+
+#### UI Components
+- React Bootstrap
+- SCSS styles
+- Responsive design
+
+#### Layout
+- Default layout with navigation
+
+#### Form Validation
+- Formik
+- yup
+
+#### Extensions
+- Number prototype extension for currency and format
+
 
 # Things I would change for Production
 
@@ -35,6 +61,9 @@ The abstract repository provides virtual methods for accessing the `DbSet` and c
 
 ### Global Exception Handler
 
+### Audit Tables
+- Additions and edits would need to be captured for Employee and Dependents
+
 ### REST Operations
 - Remove `api` prefix and use domain identifier
 - Add additional response types and models to complete the OpenAPI specification
@@ -42,11 +71,32 @@ The abstract repository provides virtual methods for accessing the `DbSet` and c
 ### Domain Objects
 
 ### Database
-
 - Optimize queries by replacing EF with Dapper ORM and create efficient SQL statements with cacheable execution plans
 - Or if EF is required, expand on the Repository abstract class to be more flexible; ex. expression argument for Get
 
 ## UI
 
+### Forms 
 
-# How I would deploy with AWS
+#### Validation Feedback
+- Provide better messaging to the user about what the error was
+
+### Layouts
+- Add additional layouts for error pages, logins, application modules, etc.
+
+### Navigation
+- After an employee is added, select them and show their info
+- After a dependent is deleted, stay on the screen with the selected employee and dependents or the employee detail if none remain
+
+### Responsive Design
+
+### Accessibility
+
+### API Clients
+
+### Update Dependencies
+- React Router
+- Redux
+
+#### React Router
+- Use loaders and actions from route transitions and form requests

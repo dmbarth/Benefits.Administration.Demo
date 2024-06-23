@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, Col, Dropdown, Form, Row, Spinner, SplitButton } from "react-bootstrap";
 import { connect, DispatchProp } from "react-redux";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { addNewEmployee, createNew, deleteEmployee, editEmployee, EmployeeState } from "../store/employee-store";
 import { fullName } from "../types/Employee";
 import { RootState } from "/app/store";
@@ -70,25 +70,49 @@ class Employee extends React.Component<Props, State> {
     this.setState({ isEditing: true });
   }
 
+  onCancel_Click(reset: Function): void {
+    reset();
+    this.setState({ isEditing: false })
+  }
+
+  createActionButton(reset: Function) {
+    const { adding, employee } = this.props;
+    const { isEditing } = this.state;
+
+    if (this.isAddingEmployee && adding == 'pending') {
+      return <Button variant='dark' className='float-right'>
+        <Spinner as='span' size='sm' animation='border' className='mr-3' />Saving</Button>
+    }
+
+    if (this.isAddingEmployee)
+      return (
+        <div>
+          <Button type='submit' variant='dark' className='float-right'>Save</Button>
+          <Button type='button' variant='outline-secondary' className='float-right mr-2' as={Link} to="/employees">Cancel</Button>
+        </div>
+      )
+
+    if (isEditing)
+      return (
+        <div>
+          <Button type='submit' variant='dark' className='float-right'>Save</Button>
+          <Button type='reset' variant='outline-secondary' className='float-right mr-2' onClick={() => this.onCancel_Click(reset)}>Cancel</Button>
+        </div>
+      )
+      
+    return (
+      <SplitButton id={`action-${employee.id}`} title="Edit" variant='dark' className='float-right' onClick={() => this.onEdit_Click()}>
+        <Dropdown.Item onClick={() => this.onDelete_Click(employee.id)}>Delete</Dropdown.Item>
+      </SplitButton>
+    )
+  }
+
   render() {
-    const { employee, adding, match } = this.props;
+    const { employee, match } = this.props;
     const { isEditing } = this.state;
 
     if (match.params["tab"] != 'details')
       return null;
-
-    let actionButton;
-
-    if (this.isAddingEmployee && adding == 'pending') {
-      actionButton = <Button variant='dark' className='float-right'>
-        <Spinner as='span' size='sm' animation='border' className='mr-3' />Saving</Button>
-    }
-    else if (this.isAddingEmployee || isEditing)
-      actionButton = <Button type='submit' variant='dark' className='float-right'>Save</Button>
-    else
-      actionButton = <SplitButton id={`action-${employee.id}`} title="Edit" variant='dark' className='float-right' onClick={() => this.onEdit_Click()}>
-        <Dropdown.Item onClick={() => this.onDelete_Click(employee.id)}>Delete</Dropdown.Item>
-      </SplitButton>
 
     return (
       <Card className='mt-3'>
@@ -102,6 +126,7 @@ class Employee extends React.Component<Props, State> {
             {({
               handleSubmit,
               handleChange,
+              handleReset,
               values,
               touched,
               errors
@@ -149,7 +174,7 @@ class Employee extends React.Component<Props, State> {
                       isInvalid={errors.income && touched.income} />
                   </Col>
                 </Form.Group>
-                {actionButton}
+                {this.createActionButton(handleReset)}
               </Form>
             )}
           </Formik>
