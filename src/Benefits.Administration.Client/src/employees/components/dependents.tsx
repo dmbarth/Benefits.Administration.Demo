@@ -2,14 +2,14 @@ import React from 'react';
 import { Button, Card, Dropdown, Spinner, SplitButton } from 'react-bootstrap';
 import { connect, DispatchProp } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { updateEmployee, EmployeeState, deleteDependent } from '../store/employee-store';
+import { updateEmployee, EmployeeState, deleteDependent, fetchEmployee } from '../store/employee-store';
 import { RootState } from '/app/store';
 import DependentCard from './dependent-card';
 
 type Props = DispatchProp & RouteComponentProps & EmployeeState;
 type State = {
   isAdding: boolean;
-  isEditingIndex: number;
+  isEditingId: number;
 }
 
 class Dependents extends React.Component<Props, State> {
@@ -18,7 +18,7 @@ class Dependents extends React.Component<Props, State> {
 
     this.state = {
       isAdding: false,
-      isEditingIndex: -1
+      isEditingId: -1
     };
   }
 
@@ -69,8 +69,8 @@ class Dependents extends React.Component<Props, State> {
     dispatch(updateEmployee(emp));
   }
 
-  onEdit_Click(idx: number) {
-    this.setState({ isEditingIndex: idx });
+  onEdit_Click(id: number) {
+    this.setState({ isEditingId: id });
   }
 
   onDelete_Click(id: number, dependentId: number) {
@@ -79,9 +79,13 @@ class Dependents extends React.Component<Props, State> {
     dispatch(deleteDependent(id, dependentId));
   }
 
+  onCancel_Click() {
+    this.setState({ isAdding: false, isEditingId: -1 });
+  }
+
   render() {
     const { match, employee } = this.props;
-    const { isAdding, isEditingIndex } = this.state;
+    const { isAdding, isEditingId } = this.state;
 
     if (match.params["tab"] != "dependents" || !employee)
       return null;
@@ -103,36 +107,15 @@ class Dependents extends React.Component<Props, State> {
         <DependentCard key={dependent.id}
           title={isAdding && idx == lastIndex ? "New Dependent" : null}
           dependent={dependent}
+          onEdit={this.onEdit_Click.bind(this)}
+          onDelete={this.onDelete_Click.bind(this)}
+          onCancel={this.onCancel_Click.bind(this)}
           isAdding={isAdding && idx == lastIndex}
-          isEditing={isEditingIndex >= 0}
-          isDisabled={isAdding && idx != lastIndex}>
-          {this.createActionButton(idx, lastIndex, employee.id, dependent.id)}
-        </DependentCard>
+          isEditing={isEditingId == dependent.id}
+          isDisabled={isAdding && idx != lastIndex}/>
       ))}
-      {isAdding ? null : <Button variant='dark' className='mt-3 float-right' onClick={() => this.onAdd_Click()}>Add</Button>}
+      {isAdding || isEditingId !== -1 ? null : <Button variant='dark' className='mt-3 float-right' onClick={() => this.onAdd_Click()}>Add</Button>}
     </>
-  }
-
-  createActionButton(idx: number, lastIndex: number, employeeId: number, dependentId: number): React.ReactNode {
-    const { adding } = this.props;
-    const { isAdding, isEditingIndex } = this.state;
-
-    if (isAdding && adding == 'pending')
-      return (
-        <Button variant='dark' className='float-right'>
-          <Spinner as='span' size='sm' animation='border' className='mr-3' />Saving</Button>)
-
-    if (isAdding || isEditingIndex >= 0)
-      return <Button type='submit' variant='dark' className='float-right'>Save</Button>
-
-    if (isAdding && idx != lastIndex)
-      return null;
-
-    return (
-      <SplitButton id='edit-split' title="Edit" variant='dark' className='float-right' onClick={() => this.onEdit_Click(idx)}>
-        <Dropdown.Item onClick={() => this.onDelete_Click(employeeId, dependentId)}>Delete</Dropdown.Item>
-      </SplitButton>
-    )
   }
 }
 
