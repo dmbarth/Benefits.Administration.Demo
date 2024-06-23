@@ -4,12 +4,10 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Application.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        IEmployeeRepository Employees { get; }
-
-        IBenefitRepository Benefits { get; }
-
-        Task<int> CompleteAsync();
-    }
+  public interface IUnitOfWork : IDisposable
+  {
+    IEmployeeRepository Employees { get; }
+    IBenefitRepository Benefits { get; }
+    Task<int> CompleteAsync();
+  }
 }

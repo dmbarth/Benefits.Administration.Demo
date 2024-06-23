@@ -19,7 +19,6 @@ namespace Benefits.Administration.Infrastructure
     }
 
     public IEmployeeRepository Employees { get; private set; }
-
     public IBenefitRepository Benefits { get; private set; }
 
     public async Task<int> CompleteAsync()

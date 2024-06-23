@@ -23,7 +23,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
 
             modelBuilder.Entity("Benefits.Administration.Application.Entities.Benefit", b =>
                 {
-                    b.Property<long?>("ID")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -42,14 +42,14 @@ namespace Benefits.Administration.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasMaxLength(4);
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Benefits");
 
                     b.HasData(
                         new
                         {
-                            ID = 1L,
+                            Id = 1L,
                             DependentCost = 500.0,
                             EmployeeCost = 1000.0,
                             PayPeriods = 26,
@@ -59,12 +59,12 @@ namespace Benefits.Administration.Infrastructure.Migrations
 
             modelBuilder.Entity("Benefits.Administration.Application.Entities.Dependent", b =>
                 {
-                    b.Property<long?>("ID")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("EmployeeID")
+                    b.Property<long>("EmployeeId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
@@ -84,41 +84,41 @@ namespace Benefits.Administration.Infrastructure.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("EmployeeID");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Dependents");
 
                     b.HasData(
                         new
                         {
-                            ID = 1L,
-                            EmployeeID = 1L,
+                            Id = 1L,
+                            EmployeeId = 1L,
                             FirstName = "Padme",
                             LastName = "Skywalker",
                             Type = 1
                         },
                         new
                         {
-                            ID = 2L,
-                            EmployeeID = 1L,
+                            Id = 2L,
+                            EmployeeId = 1L,
                             FirstName = "Luke",
                             LastName = "Skywalker",
                             Type = 2
                         },
                         new
                         {
-                            ID = 3L,
-                            EmployeeID = 1L,
+                            Id = 3L,
+                            EmployeeId = 1L,
                             FirstName = "Leah",
                             LastName = "Skywalker",
                             Type = 2
                         },
                         new
                         {
-                            ID = 4L,
-                            EmployeeID = 2L,
+                            Id = 4L,
+                            EmployeeId = 2L,
                             FirstName = "John",
                             LastName = "Connor",
                             Type = 2
@@ -127,7 +127,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
 
             modelBuilder.Entity("Benefits.Administration.Application.Entities.Discount", b =>
                 {
-                    b.Property<long?>("ID")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -135,7 +135,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<long>("BenefitID")
+                    b.Property<long>("BenefitId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsActive")
@@ -144,18 +144,18 @@ namespace Benefits.Administration.Infrastructure.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("BenefitID");
+                    b.HasIndex("BenefitId");
 
                     b.ToTable("Discounts");
 
                     b.HasData(
                         new
                         {
-                            ID = 1L,
+                            Id = 1L,
                             Amount = 0.10000000000000001,
-                            BenefitID = 1L,
+                            BenefitId = 1L,
                             IsActive = true,
                             Type = 1
                         });
@@ -163,7 +163,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
 
             modelBuilder.Entity("Benefits.Administration.Application.Entities.Employee", b =>
                 {
-                    b.Property<long?>("ID")
+                    b.Property<long?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -185,21 +185,21 @@ namespace Benefits.Administration.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
-                            ID = 1L,
+                            Id = 1L,
                             FirstName = "Anakin",
                             Income = 52000.0,
                             LastName = "Skywalker"
                         },
                         new
                         {
-                            ID = 2L,
+                            Id = 2L,
                             FirstName = "Sarah",
                             Income = 52000.0,
                             LastName = "Connor",
@@ -207,7 +207,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
                         },
                         new
                         {
-                            ID = 3L,
+                            Id = 3L,
                             FirstName = "Bruce",
                             Income = 52000.0,
                             LastName = "Wayne",
@@ -219,7 +219,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
                 {
                     b.HasOne("Benefits.Administration.Application.Entities.Employee", "Employee")
                         .WithMany("Dependents")
-                        .HasForeignKey("EmployeeID")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -228,7 +228,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
                 {
                     b.HasOne("Benefits.Administration.Application.Entities.Benefit", "Benefit")
                         .WithMany("Discounts")
-                        .HasForeignKey("BenefitID")
+                        .HasForeignKey("BenefitId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });

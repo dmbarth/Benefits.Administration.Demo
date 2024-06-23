@@ -4,22 +4,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Benefits.Administration.Application.Entities
 {
-    public class Benefit : Entity, IAggregateRoot
-    {
-        protected internal Benefit() { }
+  public class Benefit : Entity<long>, IAggregateRoot
+  {
+    protected internal Benefit() { }
 
-        [Required, MaxLength(4)]
-        public int Year { get; set; }
+    [Required, MaxLength(4)]
+    public int Year { get; set; }
 
-        [Required, MaxLength(2)]
-        public int PayPeriods { get; set; }
+    [Required, MaxLength(2)]
+    public int PayPeriods { get; set; }
 
-        [Required]
-        public double EmployeeCost { get; set; }
+    [Required]
+    public double EmployeeCost { get; set; }
 
-        [Required]
-        public double DependentCost { get; set; }
+    [Required]
+    public double DependentCost { get; set; }
 
-        public virtual ICollection<Discount> Discounts { get; set; }
-    }
+    public virtual ICollection<Discount> Discounts { get; set; }
+  }
 }

@@ -31,7 +31,7 @@ namespace Benefits.Administration.Application.Tests.UseCases
 
         public Employee Employee => new Employee() { ID = 1L, FirstName = "Anakin", LastName = "Skywalker", Income = 52000D, Dependents = Dependents };
 
-        public ICollection<Discount> Discounts => new Discount[] { new Discount() { ID = 1L, BenefitID = 1L, Type = DiscountType.NameStartsWithA, Amount = 0.1, IsActive = true } };
+        public ICollection<Discount> Discounts => new Discount[] { new Discount() { ID = 1L, BenefitId = 1L, Type = DiscountType.NameStartsWithA, Amount = 0.1, IsActive = true } };
 
         public ICollection<Benefit> Benefits => new Benefit[] {
             new Benefit() { ID = 1L, Year = 2020, PayPeriods = 26, EmployeeCost = 1000D, DependentCost = 500D, Discounts = Discounts }

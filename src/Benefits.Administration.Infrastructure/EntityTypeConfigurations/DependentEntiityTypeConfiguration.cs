@@ -5,21 +5,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Benefits.Administration.Infrastructure.EntityTypeConfigurations
 {
-    public class DependentEntiityTypeConfiguration : IEntityTypeConfiguration<Dependent>
+  public class DependentEntiityTypeConfiguration : IEntityTypeConfiguration<Dependent>
+  {
+    public void Configure(EntityTypeBuilder<Dependent> builder)
     {
-        public void Configure(EntityTypeBuilder<Dependent> builder)
-        {
-            builder.HasKey(entity => entity.ID);
+      builder.HasKey(entity => entity.Id);
 
-            builder.Property(entity => entity.ID)
-                .ValueGeneratedOnAdd();
+      builder.Property(entity => entity.Id)
+          .ValueGeneratedOnAdd();
 
-            builder.HasData(
-                new { ID = 1L, FirstName = "Padme", LastName = "Skywalker", Type = DependentType.Spouse, EmployeeID = 1L },
-                new { ID = 2L, FirstName = "Luke", LastName = "Skywalker", Type = DependentType.Child, EmployeeID = 1L },
-                new { ID = 3L, FirstName = "Leah", LastName = "Skywalker", Type = DependentType.Child, EmployeeID = 1L },
-                new { ID = 4L, FirstName = "John", LastName = "Connor", Type = DependentType.Child, EmployeeID = 2L }
-            );
-        }
+      builder.HasData(
+        new { Id = 1L, FirstName = "Padme", LastName = "Skywalker", Type = DependentType.Spouse, EmployeeId = 1L },
+        new { Id = 2L, FirstName = "Luke", LastName = "Skywalker", Type = DependentType.Child, EmployeeId = 1L },
+        new { Id = 3L, FirstName = "Leah", LastName = "Skywalker", Type = DependentType.Child, EmployeeId = 1L },
+        new { Id = 4L, FirstName = "John", LastName = "Connor", Type = DependentType.Child, EmployeeId = 2L }
+      );
     }
+  }
 }

@@ -4,23 +4,23 @@ using System.Text.Json.Serialization;
 
 namespace Benefits.Administration.Application.Entities
 {
-    public class Discount : Entity
-    {
-        protected internal Discount() { }
+  public class Discount : Entity<long>
+  {
+    protected internal Discount() { }
 
-        [Required]
-        public DiscountType Type { get; set; }
+    [Required]
+    public DiscountType Type { get; set; }
 
-        [Required]
-        public double Amount { get; set; }
+    [Required]
+    public double Amount { get; set; }
 
-        [Required]
-        public bool IsActive { get; set; }
+    [Required]
+    public bool IsActive { get; set; }
 
-        [Required]
-        public long BenefitID { get; set; }
+    [Required]
+    public long BenefitId { get; set; }
 
-        [JsonIgnore]
-        public Benefit Benefit { get; set; }
-    }
+    [JsonIgnore]
+    public Benefit Benefit { get; set; }
+  }
 }

@@ -10,7 +10,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
                 name: "Benefits",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Year = table.Column<int>(maxLength: 4, nullable: false),
                     PayPeriods = table.Column<int>(maxLength: 2, nullable: false),
@@ -19,14 +19,14 @@ namespace Benefits.Administration.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Benefits", x => x.ID);
+                    table.PrimaryKey("PK_Benefits", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 100, nullable: false),
                     MiddleName = table.Column<string>(maxLength: 100, nullable: true),
@@ -35,61 +35,61 @@ namespace Benefits.Administration.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.ID);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Discounts",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(nullable: false),
                     Amount = table.Column<double>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    BenefitID = table.Column<long>(nullable: false)
+                    BenefitId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Discounts", x => x.ID);
+                    table.PrimaryKey("PK_Discounts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Discounts_Benefits_BenefitID",
-                        column: x => x.BenefitID,
+                        column: x => x.BenefitId,
                         principalTable: "Benefits",
-                        principalColumn: "ID");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Dependents",
                 columns: table => new
                 {
-                    ID = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 100, nullable: false),
                     MiddleName = table.Column<string>(maxLength: 100, nullable: true),
                     LastName = table.Column<string>(maxLength: 100, nullable: false),
                     Type = table.Column<int>(nullable: false),
-                    EmployeeID = table.Column<long>(nullable: false)
+                    EmployeeId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dependents", x => x.ID);
+                    table.PrimaryKey("PK_Dependents", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Dependents_Employees_EmployeeID",
-                        column: x => x.EmployeeID,
+                        column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Benefits",
-                columns: new[] { "ID", "DependentCost", "EmployeeCost", "PayPeriods", "Year" },
+                columns: new[] { "Id", "DependentCost", "EmployeeCost", "PayPeriods", "Year" },
                 values: new object[] { 1L, 500.0, 1000.0, 26, 2020 });
 
             migrationBuilder.InsertData(
                 table: "Employees",
-                columns: new[] { "ID", "FirstName", "Income", "LastName", "MiddleName" },
+                columns: new[] { "Id", "FirstName", "Income", "LastName", "MiddleName" },
                 values: new object[,]
                 {
                     { 1L, "Anakin", 52000.0, "Skywalker", null },
@@ -99,7 +99,7 @@ namespace Benefits.Administration.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Dependents",
-                columns: new[] { "ID", "EmployeeID", "FirstName", "LastName", "MiddleName", "Type" },
+                columns: new[] { "Id", "EmployeeId", "FirstName", "LastName", "MiddleName", "Type" },
                 values: new object[,]
                 {
                     { 1L, 1L, "Padme", "Skywalker", null, 1 },
@@ -110,18 +110,18 @@ namespace Benefits.Administration.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Discounts",
-                columns: new[] { "ID", "Amount", "BenefitID", "IsActive", "Type" },
+                columns: new[] { "Id", "Amount", "BenefitId", "IsActive", "Type" },
                 values: new object[] { 1L, 0.10000000000000001, 1L, true, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dependents_EmployeeID",
                 table: "Dependents",
-                column: "EmployeeID");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Discounts_BenefitID",
                 table: "Discounts",
-                column: "BenefitID");
+                column: "BenefitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

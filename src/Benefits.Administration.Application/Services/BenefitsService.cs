@@ -15,8 +15,8 @@ namespace Benefits.Administration.Application.Services
 
     public BenefitsService(ILogger<BenefitsService> logger, IUnitOfWork unitOfWork)
     {
-      _logger = logger ?? throw new ArgumentNullException(nameof(ILogger<BenefitsService>));
-      _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(IUnitOfWork));
+      _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+      _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
     public async Task<Benefit> GetBenefitByIdAsync(long id)

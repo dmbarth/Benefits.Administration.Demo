@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Infrastructure.Repositories
 {
-  public class BenefitRepository : Repository<Benefit>, IBenefitRepository
+  public class BenefitRepository : Repository<Benefit,long>, IBenefitRepository
   {
     public BenefitRepository(BenefitsDbContext context) : base(context) { }
 
     public async override Task<Benefit> GetByIdAsync(long id)
     {
       return await _context.Benefits
-        .Where(entity => entity.ID == id)
+        .Where(entity => entity.Id == id)
         .Include(entity => entity.Discounts)
         .FirstOrDefaultAsync();
     }

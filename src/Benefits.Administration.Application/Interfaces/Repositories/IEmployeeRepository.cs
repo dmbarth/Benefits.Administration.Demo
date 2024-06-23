@@ -2,8 +2,5 @@
 
 namespace Benefits.Administration.Application.Interfaces.Repositories
 {
-    public interface IEmployeeRepository : IRepository<Employee>
-    {
-
-    }
+  public interface IEmployeeRepository : IRepository<Employee, long> { }
 }

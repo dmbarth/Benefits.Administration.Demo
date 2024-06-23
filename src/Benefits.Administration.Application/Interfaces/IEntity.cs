@@ -1,7 +1,7 @@
 ﻿namespace Benefits.Administration.Application.Interfaces
 {
-    public interface IEntity
-    {
-        long? ID { get; }
-    }
+  public interface IEntity<TId>
+  {
+    TId Id { get; }
+  }
 }

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Benefits.Administration.Application.Entities
 {
-    public abstract class Entity : IEntity
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long? ID { get; protected internal set; }
-    }
+  public abstract class Entity<TId> : IEntity<TId>
+  {
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public TId Id { get; protected internal set; }
+  }
 }

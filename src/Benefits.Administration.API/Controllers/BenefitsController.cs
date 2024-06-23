@@ -25,20 +25,20 @@ namespace Benefits.Administration.API.Controllers
     [HttpGet]
     [Description("Get Benefits")]
     [ProducesResponseType(typeof(IEnumerable<Benefit>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetBenefits([FromQuery] int? year)
+    public async Task<IActionResult> GetAllAsync([FromQuery] int? year)
     {
       var benefits = await _benefitsService.GetBenefitsAsync(year);
 
       return Ok(benefits);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{benefitsId}")]
     [Description("Get Benefits By Id")]
     [ProducesResponseType(typeof(Benefit), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetBenefitById([FromRoute] long id)
+    public async Task<IActionResult> GetAsync([FromRoute] long benefitsId)
     {
-      var benefit = await _benefitsService.GetBenefitByIdAsync(id);
+      var benefit = await _benefitsService.GetBenefitByIdAsync(benefitsId);
 
       return Ok(benefit);
     }
