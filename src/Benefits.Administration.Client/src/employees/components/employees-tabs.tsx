@@ -11,78 +11,77 @@ import { fetchEmployee } from '../store/employee-store';
 
 type Props = DispatchProp & RouteComponentProps & EmployeesState;
 
-class EmployeesTabs extends React.Component<Props>
-{
-    componentDidMount(){
-        const { dispatch, match } = this.props;
+class EmployeesTabs extends React.Component<Props> {
+  componentDidMount() {
+    const { dispatch, match } = this.props;
 
-        if (match.params["id"] == 0)
-            return;
+    if (match.params["id"] == 0)
+      return;
 
-        dispatch(fetchEmployee(match.params["id"]));
-    }
+    dispatch(fetchEmployee(match.params["id"]));
+  }
 
-    componentDidUpdate(prevProps: Props){
-        const { dispatch, match } = this.props;
-        
-        let prevId = prevProps.match.params["id"];
-        let id = match.params["id"];
+  componentDidUpdate(prevProps: Props) {
+    const { dispatch, match } = this.props;
 
-        if (id == prevId || id == 0)
-            return;
+    let prevId = prevProps.match.params["id"];
+    let id = match.params["id"];
 
-        dispatch(fetchEmployee(id));
-    }
+    if (id == prevId || id == 0)
+      return;
 
-    render(){
-        const { match, location } = this.props;
+    dispatch(fetchEmployee(id));
+  }
 
-        let id = match.params["id"];
+  render() {
+    const { match, location } = this.props;
 
-        if (!id)
-            return null;
+    let id = match.params["id"];
 
-        return (
-            <Card>
-                <Card.Header>
-                    <Nav variant="tabs">
-                        <Nav.Item>
-                            <Nav.Link as={Link} 
-                                active={`${match.url}/details` == location.pathname}
-                                to={`${match.url}/details`}>
-                                Employee
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link as={Link} disabled={id == 0}
-                                active={`${match.url}/dependents` == location.pathname}
-                                to={`${match.url}/dependents`}>
-                                Dependents
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link as={Link} disabled={id == 0}
-                                active={`${match.url}/deductions` == location.pathname}
-                                to={`${match.url}/deductions`}>
-                                Deductions
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Card.Header>
-                <Card.Body>
-                    <Switch>
-                        <Route path={`${match.path}/:tab`}>
-                            <Employee />
-                            <Dependents />
-                            <Deductions />
-                        </Route>
-                    </Switch>
-                </Card.Body>
-            </Card>
-        )
-    }
+    if (!id)
+      return null;
+
+    return (
+      <Card>
+        <Card.Header>
+          <Nav variant="tabs">
+            <Nav.Item>
+              <Nav.Link as={Link}
+                active={`${match.url}/details` == location.pathname}
+                to={`${match.url}/details`}>
+                Employee
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} disabled={id == 0}
+                active={`${match.url}/dependents` == location.pathname}
+                to={`${match.url}/dependents`}>
+                Dependents
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} disabled={id == 0}
+                active={`${match.url}/deductions` == location.pathname}
+                to={`${match.url}/deductions`}>
+                Deductions
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Card.Header>
+        <Card.Body>
+          <Switch>
+            <Route path={`${match.path}/:tab`}>
+              <Employee />
+              <Dependents />
+              <Deductions />
+            </Route>
+          </Switch>
+        </Card.Body>
+      </Card>
+    )
+  }
 }
 
 export default connect((rootState: RootState) => {
-    return { ...rootState.employees }
+  return { ...rootState.employees }
 })(withRouter(EmployeesTabs));

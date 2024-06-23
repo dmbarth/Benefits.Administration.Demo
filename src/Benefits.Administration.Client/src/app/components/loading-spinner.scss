@@ -1,10 +1,9 @@
-.loading-spinner 
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    > div {
-        margin-right: 0.5em;
-    }
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  >div {
+    margin-right: 0.5em;
+  }
 }

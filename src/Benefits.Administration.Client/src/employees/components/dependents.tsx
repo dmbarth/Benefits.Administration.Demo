@@ -8,135 +8,134 @@ import DependentCard from './dependent-card';
 
 type Props = DispatchProp & RouteComponentProps & EmployeeState;
 type State = {
-    isAdding: boolean;
-    isEditingIndex: number;
+  isAdding: boolean;
+  isEditingIndex: number;
 }
 
-class Dependents extends React.Component<Props,State>
-{
-    constructor(props: Props) {
-        super(props);
+class Dependents extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
 
-        this.state = {
-            isAdding: false,
-            isEditingIndex: -1
-        };
+    this.state = {
+      isAdding: false,
+      isEditingIndex: -1
+    };
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { dispatch, employee } = this.props;
+    const { isAdding } = this.state;
+
+    if (prevState.isAdding && isAdding) {
+      this.setState({ isAdding: false });
+
+      let emp = {
+        id: employee.id,
+        firstName: employee.firstName,
+        middleName: employee.middleName,
+        lastName: employee.lastName,
+        income: employee.income,
+        dependents: [...employee.dependents]
+      };
+
+      emp.dependents.pop();
+
+      dispatch(updateEmployee(emp));
     }
+  }
 
-    componentDidUpdate(prevProps: Props, prevState: State) {
-        const { dispatch, employee } = this.props;
-        const { isAdding } = this.state;
+  onAdd_Click() {
+    const { dispatch, employee } = this.props;
 
-        if (prevState.isAdding && isAdding) {
-            this.setState({ isAdding: false });
-            
-            let emp = {
-                id: employee.id,
-                firstName: employee.firstName,
-                middleName: employee.middleName,
-                lastName: employee.lastName,
-                income: employee.income,
-                dependents: [...employee.dependents]
-            };
+    let emp = {
+      id: employee.id,
+      firstName: employee.firstName,
+      middleName: employee.middleName,
+      lastName: employee.lastName,
+      income: employee.income,
+      dependents: [...employee.dependents]
+    };
 
-            emp.dependents.pop();
+    emp.dependents.push({
+      id: 0,
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      type: 0
+    });
 
-            dispatch(updateEmployee(emp));
-        }
-    }
-    
-    onAdd_Click() {
-        const { dispatch, employee } = this.props;
+    this.setState({ isAdding: true });
 
-        let emp = {
-            id: employee.id,
-            firstName: employee.firstName,
-            middleName: employee.middleName,
-            lastName: employee.lastName,
-            income: employee.income,
-            dependents: [...employee.dependents]
-        };
-        
-        emp.dependents.push({
-            id: 0,
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            type: 0
-        });
+    dispatch(updateEmployee(emp));
+  }
 
-        this.setState({ isAdding: true });
-        
-        dispatch(updateEmployee(emp));
-    }
-    
-    onEdit_Click(idx: number) {
-        this.setState({ isEditingIndex: idx });
-    }
-    
-    onDelete_Click(id: number, dependentId: number){
-        const { dispatch } = this.props;
+  onEdit_Click(idx: number) {
+    this.setState({ isEditingIndex: idx });
+  }
 
-        dispatch(deleteDependent(id, dependentId));
-    }
-    
-    render(){
-        const { match, employee } = this.props;
-        const { isAdding, isEditingIndex } = this.state;
+  onDelete_Click(id: number, dependentId: number) {
+    const { dispatch } = this.props;
 
-        if (match.params["tab"] != "dependents" || !employee)
-            return null;
+    dispatch(deleteDependent(id, dependentId));
+  }
 
-        if (employee.dependents.length == 0)
-            return (
-                <Card>
-                    <Card.Body className='d-flex flex-row justify-content-between align-items-center'>
-                        <div>The Employee has no dependents.</div>
-                        <Button variant='dark' onClick={() => this.onAdd_Click()}>Add</Button>
-                    </Card.Body>
-                </Card>
-            )
-        
-        const lastIndex = employee.dependents.length - 1;
+  render() {
+    const { match, employee } = this.props;
+    const { isAdding, isEditingIndex } = this.state;
 
-        return <>
-            { employee.dependents.map((dependent, idx) => (
-                <DependentCard key={dependent.id}
-                    title={isAdding && idx == lastIndex ? "New Dependent" : null}
-                    dependent={dependent} 
-                    isAdding={isAdding && idx == lastIndex}
-                    isEditing={isEditingIndex >= 0}
-                    isDisabled={isAdding && idx != lastIndex}>
-                    {this.createActionButton(idx, lastIndex, employee.id, dependent.id)}
-                </DependentCard>
-            ))}
-            { isAdding ? null : <Button variant='dark' className='mt-3 float-right' onClick={() => this.onAdd_Click()}>Add</Button> }
-        </>
-    }
+    if (match.params["tab"] != "dependents" || !employee)
+      return null;
 
-    createActionButton(idx: number, lastIndex: number, employeeId: number, dependentId: number): React.ReactNode {
-        const { adding } = this.props;
-        const { isAdding, isEditingIndex } = this.state;
+    if (employee.dependents.length == 0)
+      return (
+        <Card>
+          <Card.Body className='d-flex flex-row justify-content-between align-items-center'>
+            <div>The Employee has no dependents.</div>
+            <Button variant='dark' onClick={() => this.onAdd_Click()}>Add</Button>
+          </Card.Body>
+        </Card>
+      )
 
-        if (isAdding && adding == 'pending')
-            return (
-                <Button variant='dark' className='float-right'>
-                    <Spinner as='span' size='sm' animation='border' className='mr-3' />Saving</Button> )
+    const lastIndex = employee.dependents.length - 1;
 
-        if (isAdding || isEditingIndex >= 0)
-            return <Button type='submit' variant='dark' className='float-right'>Save</Button>
+    return <>
+      {employee.dependents.map((dependent, idx) => (
+        <DependentCard key={dependent.id}
+          title={isAdding && idx == lastIndex ? "New Dependent" : null}
+          dependent={dependent}
+          isAdding={isAdding && idx == lastIndex}
+          isEditing={isEditingIndex >= 0}
+          isDisabled={isAdding && idx != lastIndex}>
+          {this.createActionButton(idx, lastIndex, employee.id, dependent.id)}
+        </DependentCard>
+      ))}
+      {isAdding ? null : <Button variant='dark' className='mt-3 float-right' onClick={() => this.onAdd_Click()}>Add</Button>}
+    </>
+  }
 
-        if (isAdding && idx != lastIndex)
-            return null;
-        
-        return (
-            <SplitButton id='edit-split' title="Edit" variant='dark' className='float-right' onClick={() => this.onEdit_Click(idx)}>
-                <Dropdown.Item onClick={() => this.onDelete_Click(employeeId, dependentId)}>Delete</Dropdown.Item>
-            </SplitButton>
-        )
-    }
+  createActionButton(idx: number, lastIndex: number, employeeId: number, dependentId: number): React.ReactNode {
+    const { adding } = this.props;
+    const { isAdding, isEditingIndex } = this.state;
+
+    if (isAdding && adding == 'pending')
+      return (
+        <Button variant='dark' className='float-right'>
+          <Spinner as='span' size='sm' animation='border' className='mr-3' />Saving</Button>)
+
+    if (isAdding || isEditingIndex >= 0)
+      return <Button type='submit' variant='dark' className='float-right'>Save</Button>
+
+    if (isAdding && idx != lastIndex)
+      return null;
+
+    return (
+      <SplitButton id='edit-split' title="Edit" variant='dark' className='float-right' onClick={() => this.onEdit_Click(idx)}>
+        <Dropdown.Item onClick={() => this.onDelete_Click(employeeId, dependentId)}>Delete</Dropdown.Item>
+      </SplitButton>
+    )
+  }
 }
 
 export default connect((rootState: RootState) => {
-    return { ...rootState.employee }
+  return { ...rootState.employee }
 })(withRouter(Dependents));

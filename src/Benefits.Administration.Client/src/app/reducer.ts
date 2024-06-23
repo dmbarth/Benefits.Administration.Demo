@@ -4,7 +4,7 @@ import employee from '../employees/store/employee-store'
 import deductions from '../employees/store/deductions-store'
 
 export default combineReducers({
-    employees,
-    employee,
-    deductions
+  employees,
+  employee,
+  deductions
 });
