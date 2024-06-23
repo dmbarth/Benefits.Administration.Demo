@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Benefits.Administration.Infrastructure.EntityTypeConfigurations
 {
-    public class DiscountEntityTypeConfiguration : IEntityTypeConfiguration<Discount>
+  public class DiscountEntityTypeConfiguration : IEntityTypeConfiguration<Discount>
+  {
+    public void Configure(EntityTypeBuilder<Discount> builder)
     {
-        public void Configure(EntityTypeBuilder<Discount> builder)
-        {
-            builder.HasData(
-                new { Id = 1L, BenefitId = 1L, Type = DiscountType.NameStartsWithA, Amount = 0.1, IsActive = true }
-            );
-        }
+      builder.HasData(
+        new { Id = 1L, BenefitId = 1L, Type = DiscountType.NameStartsWithA, Amount = 0.1, IsActive = true }
+      );
     }
+  }
 }

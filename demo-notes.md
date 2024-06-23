@@ -51,7 +51,7 @@ The abstract repository provides virtual methods for accessing the `DbSet` and c
 - Number prototype extension for currency and format
 
 
-# Things I would change for Production
+# Things I would improve upon and change for Production
 
 ## API
 

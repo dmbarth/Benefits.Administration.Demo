@@ -12,7 +12,7 @@ namespace Benefits.Administration.Infrastructure.EntityTypeConfigurations
       builder.HasKey(entity => entity.Id);
 
       builder.Property(entity => entity.Id)
-          .ValueGeneratedOnAdd();
+        .ValueGeneratedOnAdd();
 
       builder.HasData(
         new { Id = 1L, FirstName = "Padme", LastName = "Skywalker", Type = DependentType.Spouse, EmployeeId = 1L },
