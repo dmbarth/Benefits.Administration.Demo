@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { Card, Col, Form, Row } from "react-bootstrap";
 import { connect, DispatchProp } from "react-redux";
 import { RootState } from "/app/store";

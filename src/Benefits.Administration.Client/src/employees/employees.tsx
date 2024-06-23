@@ -4,7 +4,7 @@ import { connect, DispatchProp } from "react-redux";
 import { EmployeesState, fetchEmployees } from "./store/employees-store";
 import { RootState } from "/app/store";
 import LoadingSpinner from "/app/components/loading-spinner";
-import { Link, Route, RouteComponentProps, Switch, withRouter } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import EmployeeTabs from './components/employees-tabs';
 import { fullName } from "./types/Employee";
 
