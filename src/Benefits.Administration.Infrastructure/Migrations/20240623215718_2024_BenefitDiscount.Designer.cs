@@ -3,6 +3,7 @@ using Benefits.Administration.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Benefits.Administration.Infrastructure.Migrations
 {
     [DbContext(typeof(BenefitsDbContext))]
-    partial class BenefitsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240623215718_2024_BenefitDiscount")]
+    partial class _2024_BenefitDiscount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,6 +1,7 @@
 ﻿using Benefits.Administration.Application.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Benefits.Administration.Application.Entities
 {
@@ -21,5 +22,8 @@ namespace Benefits.Administration.Application.Entities
     public double DependentCost { get; set; }
 
     public virtual ICollection<Discount> Discounts { get; set; }
+
+    [JsonIgnore]
+    public virtual ICollection<BenefitDiscount> BenefitDiscounts { get; set; }
   }
 }

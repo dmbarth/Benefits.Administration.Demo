@@ -1,4 +1,5 @@
 ﻿using Benefits.Administration.Application.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -14,13 +15,10 @@ namespace Benefits.Administration.Application.Entities
     [Required]
     public double Amount { get; set; }
 
-    [Required]
-    public bool IsActive { get; set; }
-
-    [Required]
-    public long BenefitId { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<Benefit> Benefits { get; set; }
 
     [JsonIgnore]
-    public Benefit Benefit { get; set; }
+    public virtual ICollection<BenefitDiscount> BenefitDiscounts { get; set; }
   }
 }

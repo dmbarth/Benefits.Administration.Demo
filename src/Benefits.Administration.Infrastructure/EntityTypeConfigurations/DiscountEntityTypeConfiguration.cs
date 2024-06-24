@@ -10,7 +10,7 @@ namespace Benefits.Administration.Infrastructure.EntityTypeConfigurations
     public void Configure(EntityTypeBuilder<Discount> builder)
     {
       builder.HasData(
-        new { Id = 1L, BenefitId = 1L, Type = DiscountType.NameStartsWithA, Amount = 0.1, IsActive = true }
+        new { Id = 1L, Type = DiscountType.NameStartsWithA, Amount = 0.1 }
       );
     }
   }

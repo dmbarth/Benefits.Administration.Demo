@@ -44,14 +44,16 @@ namespace Benefits.Administration.Application.Services
       var empCost = (decimal)benefit.EmployeeCost;
       var depCost = (decimal)benefit.DependentCost;
 
-      var discounts = benefit.Discounts.Where(discount => discount.IsActive);
+      var discounts = benefit.BenefitDiscounts
+        .Where(bd => bd.IsActive)
+        .Select(bd => bd.Discount);
 
       var employeeDiscounts = ApplyDiscounts(discounts, empCost, employee);
       var dependentDiscounts = new List<decimal>();
 
       foreach (var dependent in employee.Dependents)
         dependentDiscounts.AddRange(ApplyDiscounts(discounts, depCost, dependent));
-
+        
       return new EmployeeDeductions(
         employee.Id,
         costPeriods ?? benefit.PayPeriods,
