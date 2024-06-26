@@ -29,8 +29,6 @@ namespace Benefits.Administration.Application.Services
       if (employee == null)
         throw new NotFoundException();
 
-      _logger.LogInformation("Calculating employee deductions");
-
       var benefits = await _unitOfWork.Benefits
         .FindAsync(entity => entity.Year == DateTime.Now.Year);
 
@@ -40,6 +38,8 @@ namespace Benefits.Administration.Application.Services
         throw new Exception("Benefit not found");
 
       _logger.LogInformation("Benefit retreived");
+
+      _logger.LogInformation("Calculating employee deductions");
 
       var empCost = (decimal)benefit.EmployeeCost;
       var depCost = (decimal)benefit.DependentCost;

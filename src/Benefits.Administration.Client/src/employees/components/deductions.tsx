@@ -36,8 +36,6 @@ class Deductions extends React.Component<Props> {
 
     if (match.params["tab"] != "deductions")
       return null;
-    // if (isAddingEmployee)
-    //     return null;
 
     if (!deductions)
       return null;

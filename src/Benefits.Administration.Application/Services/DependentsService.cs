@@ -30,9 +30,14 @@ namespace Benefits.Administration.Application.Services
       if (employee == null)
         throw new NotFoundException();
 
-      return employee.Dependents
+      var dependent = employee.Dependents
         .Where(dep => dep.Id == dependentId)
         .FirstOrDefault();
+
+      if (dependent == null)
+        throw new NotFoundException();
+
+      return dependent;
     }
 
     public async Task<long> AddDependentAsync(long employeeId, Dependent model)
