@@ -1,3 +1,4 @@
+using Benefits.Administration.API.Middleware;
 using Benefits.Administration.Application.Extensions;
 using Benefits.Administration.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,7 @@ namespace Benefits.Administration.Demo
         .UseHttpsRedirection()
         .UseRouting()
         .UseCors()
+        .UseMiddleware<GlobalExceptionMiddleware>()
         .UseAuthorization()
         .UseEndpoints(endpoints =>
         {

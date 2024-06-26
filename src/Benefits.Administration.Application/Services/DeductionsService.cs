@@ -27,7 +27,7 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(id);
 
       if (employee == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       var benefits = await _unitOfWork.Benefits
         .FindAsync(entity => entity.Year == DateTime.Now.Year);
@@ -35,7 +35,7 @@ namespace Benefits.Administration.Application.Services
       var benefit = benefits.FirstOrDefault();
 
       if (benefit == null)
-        throw new Exception("Benefit not found");
+        throw new BenefitNotFoundException();
 
       _logger.LogInformation("Benefit retreived");
 

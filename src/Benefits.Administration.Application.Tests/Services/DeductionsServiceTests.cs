@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Benefits.Administration.Application.Entities;
+using Benefits.Administration.Application.Exceptions;
 using Benefits.Administration.Application.Interfaces;
 using Benefits.Administration.Application.Models;
 using Benefits.Administration.Application.Services;
@@ -40,7 +41,7 @@ namespace Benefits.Administration.Application.Tests.UseCases
     };
 
     [Fact]
-    public void Throws_Exception_When_Benefit_Is_Not_Found()
+    public void Throws_BenefitNotFoundException_When_Benefit_Is_Not_Found()
     {
       // arrange
       _unitOfWork
@@ -51,11 +52,11 @@ namespace Benefits.Administration.Application.Tests.UseCases
       Func<Task> task = async () => await Service.CalculateDeductionsAsync(123, null);
 
       // assert
-      Assert.ThrowsAsync<Exception>(task);
+      Assert.ThrowsAsync<BenefitNotFoundException>(task);
     }
 
     [Fact]
-    public void Throws_ArgumentException_When_Employee_Is_Not_Found()
+    public void Throws_EmployeeNotFoundException_When_Employee_Is_Not_Found()
     {
       // arrange
       var benefit = new Benefit() { Id = 1L, Year = 2020, PayPeriods = 26, EmployeeCost = 1000D, DependentCost = 500D };
@@ -69,7 +70,7 @@ namespace Benefits.Administration.Application.Tests.UseCases
       Func<Task> task = async () => await Service.CalculateDeductionsAsync(123, null);
 
       // assert
-      Assert.ThrowsAsync<ArgumentException>(task);
+      Assert.ThrowsAsync<EmployeeNotFoundException>(task);
     }
 
     [Fact]

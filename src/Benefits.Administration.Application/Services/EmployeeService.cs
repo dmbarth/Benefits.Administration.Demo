@@ -37,7 +37,7 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(id);
 
       if (employee == null)
-        new NotFoundException();
+        new EmployeeNotFoundException();
 
       _unitOfWork.Employees.Remove(employee);
 
@@ -49,7 +49,7 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(id);
 
       if (employee == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       return employee;
     }
@@ -66,7 +66,7 @@ namespace Benefits.Administration.Application.Services
       var entity = await _unitOfWork.Employees.GetByIdAsync(id);
 
       if (entity == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       _mapper.Map(model, entity);
       

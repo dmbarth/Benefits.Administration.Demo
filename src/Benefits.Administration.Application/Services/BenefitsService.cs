@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Benefits.Administration.Application.Entities;
+using Benefits.Administration.Application.Exceptions;
 using Benefits.Administration.Application.Interfaces;
 using Benefits.Administration.Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
@@ -21,7 +22,12 @@ namespace Benefits.Administration.Application.Services
 
     public async Task<Benefit> GetBenefitByIdAsync(long id)
     {
-      return await _unitOfWork.Benefits.GetByIdAsync(id);
+      var benefit = await _unitOfWork.Benefits.GetByIdAsync(id);
+
+      if (benefit == null)
+        throw new BenefitNotFoundException();
+
+      return benefit;
     }
 
     public async Task<IEnumerable<Benefit>> GetBenefitsAsync()

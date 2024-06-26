@@ -28,14 +28,14 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(employeeId);
 
       if (employee == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       var dependent = employee.Dependents
         .Where(dep => dep.Id == dependentId)
         .FirstOrDefault();
 
       if (dependent == null)
-        throw new NotFoundException();
+        throw new DependentNotFoundException();
 
       return dependent;
     }
@@ -45,7 +45,7 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(employeeId);
 
       if (employee == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       employee.Dependents.Add(model);
 
@@ -59,14 +59,14 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(employeeId);
 
       if (employee == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       var dependent = employee.Dependents
         .Where(dep => dep.Id == dependentId)
         .FirstOrDefault();
 
       if (dependent == null)
-        throw new NotFoundException();
+        throw new DependentNotFoundException();
 
       employee.Dependents.Remove(dependent);
 
@@ -78,14 +78,14 @@ namespace Benefits.Administration.Application.Services
       var employee = await _unitOfWork.Employees.GetByIdAsync(employeeId);
 
       if (employee == null)
-        throw new NotFoundException();
+        throw new EmployeeNotFoundException();
 
       var dependent = employee.Dependents
         .Where(dep => dep.Id == dependentId)
         .FirstOrDefault();
 
       if (dependent == null)
-        throw new NotFoundException();
+        throw new DependentNotFoundException();
 
       _mapper.Map(model, dependent);
 
