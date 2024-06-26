@@ -38,7 +38,7 @@ namespace Benefits.Administration.API.Controllers
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> AddAsync([FromRoute] long employeeId, [FromBody] Dependent dependent)
+    public async Task<IActionResult> CreateAsync([FromRoute] long employeeId, [FromBody] Dependent dependent)
     {
       var dependentId = await _dependentsService.AddDependentAsync(employeeId, dependent);
 

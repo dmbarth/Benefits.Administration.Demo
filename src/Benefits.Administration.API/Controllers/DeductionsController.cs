@@ -26,7 +26,7 @@ namespace Benefits.Administration.API.Controllers
     [Description("Get Deductions")]
     [ProducesResponseType(typeof(EmployeeDeductions), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetDeductionsAsync([FromRoute] long employeeId, [FromQuery] int? costPeriods)
+    public async Task<IActionResult> GetAsync([FromRoute] long employeeId, [FromQuery] int? costPeriods)
     {
       var deductions = await _deductionsService.CalculateDeductionsAsync(employeeId, costPeriods);
 

@@ -48,7 +48,7 @@ namespace Benefits.Administration.API.Controllers
     [Description("Add Employee")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> AddAsync([FromBody] Employee model)
+    public async Task<IActionResult> CreateAsync([FromBody] Employee model)
     {
       var employeeId = await _employeeService.AddEmployeeAsync(model);
 
