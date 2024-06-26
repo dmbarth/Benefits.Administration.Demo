@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Infrastructure
 {
-  public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class
+  public abstract class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class, IAggregateRoot
   {
     protected readonly BenefitsDbContext _context;
     protected readonly DbSet<TEntity> _dbSet;

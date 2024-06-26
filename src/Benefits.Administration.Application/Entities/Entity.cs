@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Benefits.Administration.Application.Entities
 {
-  public abstract class Entity<TId> : IEntity<TId>
+  public abstract class Entity<TId> : IEntity
   {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public TId Id { get; protected internal set; }

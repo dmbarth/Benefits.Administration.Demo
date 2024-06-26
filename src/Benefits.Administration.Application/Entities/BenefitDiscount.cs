@@ -1,9 +1,8 @@
-﻿using Benefits.Administration.Application.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Benefits.Administration.Application.Entities
 {
-  public class BenefitDiscount : Entity<long>, IAggregateRoot
+  public class BenefitDiscount : Entity<long>
   {
     protected internal BenefitDiscount() { }
 

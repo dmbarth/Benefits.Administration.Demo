@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Benefits.Administration.Application.Interfaces
 {
-  public interface IRepository<TEntity, TId> where TEntity : class
+  public interface IRepository<TEntity, TId> where TEntity : class, IAggregateRoot
   {
     Task<TEntity> GetByIdAsync(TId id);
     Task<IEnumerable<TEntity>> GetAllAsync();

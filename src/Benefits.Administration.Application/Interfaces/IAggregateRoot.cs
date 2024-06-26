@@ -1,4 +1,4 @@
 ﻿namespace Benefits.Administration.Application.Interfaces
 {
-  public interface IAggregateRoot { }
+  public interface IAggregateRoot : IEntity { }
 }
